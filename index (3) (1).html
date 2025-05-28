@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COCA-COLA PROFITABILITY METRICS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --coke-red: #f40009;
+            --coke-dark: #1a1a1a;
+            --coke-light: #f5f5f5;
+            --coke-gray: #666666;
+            --coke-blue: #1e90ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--coke-dark);
+            background-color: var(--coke-light);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1554866585-cd94860890b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 200px;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            max-width: 800px;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 2.5rem;
+            color: var(--coke-red);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--coke-red);
+            margin: 1rem auto;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: var(--coke-dark);
+            margin: 2rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .chart {
+            height: 400px;
+            width: 100%;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: var(--coke-red);
+            margin-top: 0;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--coke-red);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .highlight {
+            background-color: rgba(244, 0, 9, 0.1);
+            padding: 2rem;
+            border-left: 4px solid var(--coke-red);
+            margin: 2rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--coke-red);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid var(--coke-red);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-chart {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .company-metric {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .metric-bar {
+            height: 200px;
+            width: 60px;
+            margin: 0 auto;
+            background: linear-gradient(to top, var(--coke-red), #ff6b6b);
+            position: relative;
+        }
+        
+        .ko-bar {
+            height: 100%;
+        }
+        
+        .pep-bar {
+            height: 80%;
+            background: linear-gradient(to top, #004B93, #0066CC);
+        }
+        
+        .nesn-bar {
+            height: 70%;
+            background: linear-gradient(to top, #E11425, #FF2D3A);
+        }
+        
+        .tap-bar {
+            height: 30%;
+            background: linear-gradient(to top, #2D572C, #3D7A3C);
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        
+        .company-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(26, 26, 26, 0.9);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: var(--coke-red);
+        }
+        
+        .nav a.active {
+            color: var(--coke-red);
+        }
+        
+        footer {
+            background-color: var(--coke-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            margin: 1.5rem 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--coke-red);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            .comparison-chart {
+                flex-direction: column;
+            }
+            
+            .company-metric {
+                margin-bottom: 1rem;
+            }
+            
+            .nav {
+                flex-wrap: wrap;
+                padding: 0.5rem 0;
+            }
+            
+            .nav a {
+                margin: 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--coke-red);
+            color: var(--coke-red);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Accordion */
+        .accordion {
+            margin: 2rem 0;
+        }
+        
+        .accordion-item {
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .accordion-header {
+            background-color: white;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .accordion-header:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-header.active::after {
+            content: '-';
+        }
+        
+        .accordion-content {
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content-inner {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Sugar Content Chart */
+        .sugar-chart {
+            display: flex;
+            height: 300px;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .sugar-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+        }
+        
+        .sugar-segment {
+            transition: height 0.5s ease;
+        }
+        
+        .regular {
+            background-color: #f40009;
+        }
+        
+        .low-sugar {
+            background-color: #ff6b6b;
+        }
+        
+        .no-sugar {
+            background-color: #ffb3b3;
+        }
+        
+        .sugar-label {
+            text-align: center;
+            padding-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .year-label {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#revenue" class="nav-link">Revenue</a>
+        <a href="#costs" class="nav-link">Costs</a>
+        <a href="#profitability" class="nav-link">Profitability</a>
+        <a href="#comparison" class="nav-link">Competitors</a>
+        <a href="#market" class="nav-link">Market Impact</a>
+        <a href="#strategy" class="nav-link">Strategy</a>
+    </nav>
+
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/800px-Coca-Cola_logo.svg.png" alt="Coca-Cola Logo" class="logo">
+        <h1>Coca-Cola Profitability Metrics</h1>
+        <p class="subtitle">A comprehensive analysis of Coca-Cola's financial performance, revenue streams, cost structure, and competitive positioning in the beverage industry</p>
+        <div class="scroll-down" id="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <section id="revenue" class="animate">
+        <h2>How Coca-Cola Makes Money</h2>
+        <p>Coca-Cola earns money in two main ways:</p>
+        
+        <div class="grid">
+            <div class="card animate delay-1">
+                <h3>Selling Concentrates & Syrups</h3>
+                <p>These are sold to bottling partners, who then produce, package, and distribute the drinks. This is Coca-Cola's most profitable source and makes up over 50% of their revenue.</p>
+            </div>
+            <div class="card animate delay-2">
+                <h3>Selling Finished Beverages</h3>
+                <p>These are ready-to-drink products like Coca-Cola, Sprite, Fanta, and Powerade. These make up around 37% of the company's revenue.</p>
+            </div>
+        </div>
+        
+        <div class="chart-container animate delay-3">
+            <h3>Revenue Sources</h3>
+            <div class="chart" id="revenueChart">
+                <!-- This will be filled by JavaScript -->
+                <canvas id="revenueSourcesChart"></canvas>
+            </div>
+            
+            <h3>Revenue by Region</h3>
+            <div class="chart" id="regionChart">
+                <canvas id="revenueByRegionChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="costs" class="animate">
+        <h2>What Coca-Cola Spends Money On</h2>
+        <p>Major operating costs include:</p>
+        
+        <div class="grid">
+            <div class="card animate delay-1">
+                <h3>Cost of Goods Sold (COGS)</h3>
+                <p>$18.32 billion in 2024 – covers ingredients, packaging, and production.</p>
+            </div>
+            <div class="card animate delay-2">
+                <h3>Advertising & Marketing</h3>
+                <p>$5.01 billion in 2023 – Coca-Cola spends heavily on promoting its brand.</p>
+            </div>
+            <div class="card animate delay-1">
+                <h3>Distribution & Selling</h3>
+                <p>$2.6 billion – for delivery trucks, logistics, and getting drinks to stores.</p>
+            </div>
+            <div class="card animate delay-2">
+                <h3>Other Operating Costs</h3>
+                <p>$6.11 billion – includes salaries, offices, research, etc.</p>
+            </div>
+        </div>
+        
+        <div class="chart-container animate delay-3">
+            <h3>Operating Costs (2023-2024)</h3>
+            <div class="chart">
+                <canvas id="operatingCostsChart"></canvas>
+            </div>
+            <p><strong>Total SG&A (Selling, General & Admin):</strong> Nearly $14 billion.</p>
+        </div>
+    </section>
+
+    <section id="profitability" class="animate">
+        <h2>How Profitable Is Coca-Cola?</h2>
+        
+        <div class="grid">
+            <div class="card animate delay-1">
+                <h3>Gross Profit Margin</h3>
+                <p>59.5% – means Coca-Cola keeps almost 60 cents for every dollar of sales after basic costs.</p>
+            </div>
+            <div class="card animate delay-2">
+                <h3>Operating Profit Margin</h3>
+                <p>21.2% – shows good control of business expenses.</p>
+            </div>
+            <div class="card animate delay-3">
+                <h3>Net Profit Margin</h3>
+                <p>22.6% – Coca-Cola keeps nearly 23 cents in pure profit for every dollar earned.</p>
+            </div>
+        </div>
+        
+        <div class="chart-container animate delay-2">
+            <h3>Coca-Cola Profit Margins</h3>
+            <div class="chart">
+                <canvas id="profitMarginsChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="highlight animate delay-3">
+            <h3>Reasons for Coca-Cola GP(%) Fluctuations</h3>
+            <ul>
+                <li><strong>2022-2023:</strong> The increase was due to favorable pricing initiatives and a positive mix of channels and packages.</li>
+                <li><strong>2023-2024:</strong> The margin further improved, driven by continued pricing strategies and the refranchising of bottling operations in certain market relations.</li>
+            </ul>
+            <p>Coca-Cola consistently leads the industry in gross margin due to its efficient business model and pricing power.</p>
+        </div>
+    </section>
+
+    <section id="financial-indicators" class="animate">
+        <h2>Financial Indicator Overview</h2>
+        
+        <div class="grid">
+            <div class="card animate delay-1">
+                <h3>Net Profit (Net Income)</h3>
+                <p>Reflects the bottom-line profitability after all expenses. Key for evaluating the company's efficiency in generating profit from revenue.</p>
+            </div>
+            <div class="card animate delay-2">
+                <h3>Return on Equity (ROE)</h3>
+                <p>Formula: ROE = (Net Income / Shareholders' Equity) x 100</p>
+                <p>Measures how effectively the company uses shareholder funds to generate profits. A high ROE indicates strong financial performance and shareholder value creation.</p>
+            </div>
+        </div>
+        
+        <div class="chart-container animate delay-3">
+            <h3>Comparative Financial Data</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Net Income</th>
+                            <th>Shareholders' Equity</th>
+                            <th>ROE (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FY 2023</td>
+                            <td>$9.54 billion</td>
+                            <td>$25.76 billion</td>
+                            <td>37.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Q1 2024</td>
+                            <td>$3.18 billion</td>
+                            <td>$27.34 billion</td>
+                            <td>46.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Q1 2025</td>
+                            <td>$3.19 billion</td>
+                            <td>$27.50 billion</td>
+                            <td>46.2%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="highlight animate delay-1">
+            <h3>Strategic Decisions Affecting Profitability</h3>
+            <ul>
+                <li><strong>Cost Management:</strong> Focus on operational efficiency and supply chain optimization.</li>
+                <li><strong>Portfolio Management:</strong> Streamlining product lines and investment in healthier options.</li>
+                <li><strong>Global Expansion:</strong> Strong performance in international markets with strategic pricing.</li>
+                <li><strong>Bottling Strategy:</strong> Asset-light model with franchising, reducing CAPEX.</li>
+                <li><strong>Digital Engagement:</strong> Real-time demand tracking and consumer personalization.</li>
+            </ul>
+        </div>
+        
+        <div class="animate delay-2">
+            <h3>Impact on Stakeholders</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Investors</h4>
+                    <p>Attracted by high ROE and stable dividends.</p>
+                </div>
+                <div class="card">
+                    <h4>Employees</h4>
+                    <p>Benefit from job security and bonuses.</p>
+                </div>
+                <div class="card">
+                    <h4>Suppliers</h4>
+                    <p>Gain from stability and timely payments.</p>
+                </div>
+                <div class="card">
+                    <h4>Governments</h4>
+                    <p>Higher taxes from strong profits support public services.</p>
+                </div>
+                <div class="card">
+                    <h4>Customers</h4>
+                    <p>Innovation and quality are ensured by strong financials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="animate">
+        <h2>Profitability Metrics Comparison (FY 2024)</h2>
+        
+        <div class="table-container animate delay-1">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Coca-Cola (KO)</th>
+                        <th>PepsiCo (PEP)</th>
+                        <th>Nestlé (NESN)</th>
+                        <th>Molson Coors (TAP)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gross Margin</td>
+                        <td>61.06%</td>
+                        <td>~55%</td>
+                        <td>~50%</td>
+                        <td>~39%</td>
+                    </tr>
+                    <tr>
+                        <td>Operating Margin</td>
+                        <td>21.23%</td>
+                        <td>~14%</td>
+                        <td>~15%</td>
+                        <td>~14%</td>
+                    </tr>
+                    <tr>
+                        <td>Net Income</td>
+                        <td>$10.63B</td>
+                        <td>~$9.5B</td>
+                        <td>~$11.5B</td>
+                        <td>$121M (Q1 2025)</td>
+                    </tr>
+                    <tr>
+                        <td>Net Margin</td>
+                        <td>22.59%</td>
+                        <td>~10%</td>
+                        <td>~13%</td>
+                        <td>~5%</td>
+                    </tr>
+                    <tr>
+                        <td>Return on Equity (ROE)</td>
+                        <td>42.77%</td>
+                        <td>~45%</td>
+                        <td>~15%</td>
+                        <td>~6%</td>
+                    </tr>
+                    <tr>
+                        <td>EBITDA Margin</td>
+                        <td>33.61%</td>
+                        <td>~20%</td>
+                        <td>~20%</td>
+                        <td>~15%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="animate delay-2">
+            <h3>Coca-Cola's Strengths</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Superior Profitability</h4>
+                    <p>Coca-Cola leads in gross and net margins, indicating efficient cost management and strong pricing power.</p>
+                </div>
+                <div class="card">
+                    <h4>High Return on Equity</h4>
+                    <p>An ROE of 42.77% reflects effective utilization of shareholder equity.</p>
+                </div>
+                <div class="card">
+                    <h4>Global Diversification</h4>
+                    <p>Growth in Latin America (3%) and Asia Pacific (1%) offset flat performance in North America and EMEA.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="animate delay-3">
+            <h3>Coca-Cola's Weaknesses</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Declining Operating Margin</h4>
+                    <p>A drop from 24.72% in 2023 to 21.23% in 2024, primarily due to increased restructuring and strategic realignment costs.</p>
+                </div>
+                <div class="card">
+                    <h4>Rising Debt Levels</h4>
+                    <p>Debt-to-equity ratio increased to 179.12%, with a cash-to-debt ratio declining to 15.28%, indicating reduced financial flexibility.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="animate delay-1">
+            <h3>Competitor Highlights</h3>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="pepsi">PepsiCo</div>
+                <div class="tab" data-tab="nestle">Nestlé</div>
+                <div class="tab" data-tab="molson">Molson Coors</div>
+            </div>
+            
+            <div class="tab-content active" id="pepsi">
+                <div class="card">
+                    <h4>PepsiCo</h4>
+                    <ul>
+                        <li><strong>Diversified Portfolio:</strong> Combines beverages and snacks, providing resilience against market fluctuations.</li>
+                        <li><strong>Stable Earnings:</strong> Despite economic uncertainties, maintains consistent profitability.</li>
+                        <li><strong>Challenges:</strong> Faces pressures from rising supply chain costs and volatile consumer behaviors.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="nestle">
+                <div class="card">
+                    <h4>Nestlé</h4>
+                    <ul>
+                        <li><strong>Broad Product Range:</strong> Strong presence in nutrition, pet care, and beverages.</li>
+                        <li><strong>Sustainability Focus:</strong> Investments in eco-friendly practices align with consumer preferences.</li>
+                        <li><strong>Margin Pressures:</strong> Operating in lower-margin categories compared to Coca-Cola.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="molson">
+                <div class="card">
+                    <h4>Molson Coors</h4>
+                    <ul>
+                        <li><strong>Profitability Challenges:</strong> Reported a 41.8% drop in net income in Q1 2025 due to declining beer consumption amid economic concerns.</li>
+                        <li><strong>Cost-Cutting Measures:</strong> Scaling back investments and reducing discretionary spending to mitigate financial pressures.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="highlight animate delay-2">
+            <h3>Industry Trends Impacting Profitability</h3>
+            <ul>
+                <li><strong>Economic Uncertainty:</strong> Tariffs and geopolitical tensions are leading companies like PepsiCo to adjust earnings forecasts.</li>
+                <li><strong>AI and Automation:</strong> Adoption of AI for supply chain optimization and demand forecasting is becoming crucial for cost management.</li>
+                <li><strong>Sustainability and Health Trends:</strong> Consumers are increasingly favoring eco-friendly products and healthier beverage options, prompting companies to innovate accordingly.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="market" class="animate">
+        <h2>The Impact of Market Conditions on Coca-Cola's Profitability</h2>
+        
+        <div class="grid animate delay-1">
+            <div class="card">
+                <h3>Sensitivity to Price</h3>
+                <p>Consumer price sensitivity affects demand elasticity for Coca-Cola products.</p>
+            </div>
+            <div class="card">
+                <h3>Overall Shift in Preference</h3>
+                <p>Changing consumer tastes toward healthier options impact traditional soda sales.</p>
+            </div>
+            <div class="card">
+                <h3>Sugar Tariffs Increase</h3>
+                <p>Higher tariffs on sugar imports increase production costs.</p>
+            </div>
+            <div class="card">
+                <h3>Aluminium Price Increase</h3>
+                <p>Rising costs of aluminium affect packaging expenses.</p>
+            </div>
+            <div class="card">
+                <h3>COVID Price Effects</h3>
+                <p>Pandemic-related disruptions continue to affect supply chains and costs.</p>
+            </div>
+            <div class="card">
+                <h3>Global Conflicts</h3>
+                <p>Geopolitical tensions create market instability and potential supply disruptions.</p>
+            </div>
+            <div class="card">
+                <h3>Eco Friendliness</h3>
+                <p>Consumer demand for sustainable products requires investment in green initiatives.</p>
+            </div>
+            <div class="card">
+                <h3>Gas Emissions</h3>
+                <p>Regulations on emissions affect manufacturing and transportation costs.</p>
+            </div>
+            <div class="card">
+                <h3>Plastic Ban</h3>
+                <p>Restrictions on single-use plastics require packaging innovations.</p>
+            </div>
+        </div>
+        
+        <div class="highlight animate delay-2">
+            <h3>Relevance to Users</h3>
+            <p>Understanding the effect global economic trends and shifts in regulations have on Coca-Cola's bottom line gives stakeholders more insight into future cashflows, company's continuity, risk management and margins amongst others.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Creditors</h4>
+                    <p>Assess whether Coca-Cola can repay debts regardless of increasing costs.</p>
+                </div>
+                <div class="card">
+                    <h4>Investors</h4>
+                    <p>Want to know how external risks affect earnings and their investments.</p>
+                </div>
+                <div class="card">
+                    <h4>Employees</h4>
+                    <p>Assess job security amid rising input costs.</p>
+                </div>
+                <div class="card">
+                    <h4>Regulators</h4>
+                    <p>Monitor compliance with ESG (Environmental, Social, and Governance) standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="strategy" class="animate">
+        <h2>Coca-Cola's Response to Threats</h2>
+        
+        <div class="accordion animate delay-1">
+            <div class="accordion-item">
+                <div class="accordion-header">Consumer Demand</div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <ul>
+                            <li>Variety of package sizes with different prices</li>
+                            <li>Dietary and health requirements catering: Coke zero, Coke no sugar. Coke zero volume increased by 3% in 2023</li>
+                            <li>Diverse flavors such as cherry, raspberry and so forth</li>
+                        </ul>
+                        
+                        <div class="sugar-chart">
+                            <div class="sugar-bar">
+                                <div class="sugar-segment regular" style="height: 70%"></div>
+                                <div class="sugar-segment low-sugar" style="height: 20%"></div>
+                                <div class="sugar-segment no-sugar" style="height: 10%"></div>
+                                <div class="year-label">2019</div>
+                            </div>
+                            <div class="sugar-bar">
+                                <div class="sugar-segment regular" style="height: 50%"></div>
+                                <div class="sugar-segment low-sugar" style="height: 30%"></div>
+                                <div class="sugar-segment no-sugar" style="height: 20%"></div>
+                                <div class="year-label">2024</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <span style="display: inline-block; margin-right: 1rem;"><span style="display: inline-block; width: 15px; height: 15px; background-color: #f40009; margin-right: 5px;"></span> Regular</span>
+                            <span style="display: inline-block; margin-right: 1rem;"><span style="display: inline-block; width: 15px; height: 15px; background-color: #ff6b6b; margin-right: 5px;"></span> Low-sugar</span>
+                            <span style="display: inline-block;"><span style="display: inline-block; width: 15px; height: 15px; background-color: #ffb3b3; margin-right: 5px;"></span> No-sugar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">Inflation</div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <ul>
+                            <li>Increase in prices of Coca-Cola's goods offset costs with gains of 10–15%</li>
+                            <li>New strategies to attract consumers with different preferences</li>
+                            <li>Domestic sourcing of aluminium in the U.S to avoid import costs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">Supply Chain</div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <ul>
+                            <li>Post COVID pricing: Shifted production closer to high-demand markets to reduce shipping dependency</li>
+                            <li>Diverse Suppliers</li>
+                            <li>Producing locally (90% produced in U.S)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">Sustainability</div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <ul>
+                            <li>"World without waste" initiative</li>
+                            <li>Recyclability of packaging: 90% of its packaging was recyclable in 2023</li>
+                            <li>Reuse and refill initiative</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">Change in Regulations</div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <ul>
+                            <li>Coca-Cola's Plant Bottle (PET bottle)</li>
+                            <li>Recipe reformulation: reduced sugar content such as Coca-Cola light</li>
+                            <li>Sourced sugar locally avoiding import</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline animate delay-2">
+            <h3>Global Events vs Coca-Cola</h3>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h4>2020 - Beginning of COVID</h4>
+                    <p>Pandemic caused significant disruptions to supply chains and consumer behavior, leading to temporary closures and shifts in demand patterns.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h4>2021 - Shipping Crisis</h4>
+                    <p>Global shipping disruptions and container shortages led to increased logistics costs and delays in raw material deliveries.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h4>2022 - Ukraine Conflict</h4>
+                    <p>Geopolitical tensions caused pressure on logistics and input costs, with influence on ingredients moderating to 5-6%.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h4>Ongoing - Adaptation</h4>
+                    <p>Coca-Cola sourced sugar and inputs locally to mitigate global supply chain risks and reduce dependency on international markets.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="highlight animate delay-3">
+            <h3>First Principles Thinking: Reimagining Profit Disclosure</h3>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Problem</h4>
+                    <p>Traditional static reporting in PDFs is limited in its ability to convey dynamic financial information effectively.</p>
+                </div>
+                <div class="card">
+                    <h4>Rebuild</h4>
+                    <ul>
+                        <li><strong>Why measure ROE?</strong> To understand value per dollar of equity.</li>
+                        <li><strong>Can it be better explained?</strong> Yes, through visual and interactive formats.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h4>Proposal</h4>
+            <ul>
+                <li>Create an interactive dashboard with Power BI or Tableau showing trends and drivers.</li>
+                <li>Include scenario analysis and stakeholder-oriented insights.</li>
+            </ul>
+            
+            <h4>Digital Creative Output Suggestion</h4>
+            <div class="grid">
+                <div class="card">
+                    <h5>Format</h5>
+                    <p>Scrollable web story or infographic via Genially or Canva.</p>
+                </div>
+                <div class="card">
+                    <h5>Features</h5>
+                    <ul>
+                        <li>Animated timeline of ROE and Net Profit</li>
+                        <li>Pop-ups explaining strategic decisions</li>
+                        <li>Stakeholder personas showing benefits</li>
+                        <li>Embedded infographic of Coca-Cola's value creation model</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="animate">
+        <h2>Summary</h2>
+        <div class="highlight">
+            <p>Coca-Cola demonstrates strong profitability and efficient operations, outperforming key competitors in several financial metrics. However, declining operating margins and increasing debt levels warrant attention. Industry-wide trends, including economic volatility and shifting consumer preferences, influence strategies across the sector. Companies that effectively leverage technology and adapt to sustainability demands are better positioned to maintain profitability in this evolving landscape.</p>
+        </div>
+    </section>
+
+    <footer>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/800px-Coca-Cola_logo.svg.png" alt="Coca-Cola Logo" class="footer-logo">
+        <div class="footer-links">
+            <a href="#revenue">Revenue</a>
+            <a href="#costs">Costs</a>
+            <a href="#profitability">Profitability</a>
+            <a href="#comparison">Competitors</a>
+            <a href="#market">Market Impact</a>
+            <a href="#strategy">Strategy</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="copyright">© 2025 Coca-Cola Profitability Metrics Analysis. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Scroll down button
+        document.getElementById('scroll-down').addEventListener('click', function() {
+            window.scrollBy({
+                top: window.innerHeight - 100,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Navbar highlight on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Hide all tab contents and remove active class from tabs
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Show selected tab content and add active class to tab
+                document.getElementById(tabId).classList.add('active');
+                this.classList.add('active');
+            });
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+        
+        // Animate elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.animate').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Charts
+        // Revenue Sources Chart
+        const revenueSourcesCtx = document.getElementById('revenueSourcesChart').getContext('2d');
+        const revenueSourcesChart = new Chart(revenueSourcesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Concentrates & Syrups', 'Finished Beverages', 'Other'],
+                datasets: [{
+                    data: [52, 37, 11],
+                    backgroundColor: [
+                        '#f40009',
+                        '#ff6b6b',
+                        '#ffb3b3'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Revenue by Region Chart
+        const revenueByRegionCtx = document.getElementById('revenueByRegionChart').getContext('2d');
+        const revenueByRegionChart = new Chart(revenueByRegionCtx, {
+            type: 'pie',
+            data: {
+                labels: ['North America', 'Latin America', 'EMEA (Europe, Middle East & Africa)', 'Asia Pacific', 'Other'],
+                datasets: [{
+                    data: [36.6, 12.7, 24.7, 10.3, 16.7],
+                    backgroundColor: [
+                        '#f40009',
+                        '#ff6b6b',
+                        '#ffb3b3',
+                        '#ffd8d8',
+                        '#ffecec'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Operating Costs Chart
+        const operatingCostsCtx = document.getElementById('operatingCostsChart').getContext('2d');
+        const operatingCostsChart = new Chart(operatingCostsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['COGS', 'Advertising', 'Distribution & Selling', 'Other Ops'],
+                datasets: [{
+                    label: 'Cost in Billion USD',
+                    data: [18.32, 5.01, 2.6, 6.11],
+                    backgroundColor: [
+                        '#f40009',
+                        '#ff6b6b',
+                        '#ffb3b3',
+                        '#ffd8d8'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Billion USD'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // Profit Margins Chart
+        const profitMarginsCtx = document.getElementById('profitMarginsChart').getContext('2d');
+        const profitMarginsChart = new Chart(profitMarginsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Gross Profit Margin', 'Operating Profit Margin', 'Net Profit Margin'],
+                datasets: [{
+                    label: 'Percentage %',
+                    data: [59.5, 21.2, 22.6],
+                    backgroundColor: [
+                        '#f40009',
+                        '#ff6b6b',
+                        '#ffb3b3'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Percentage %'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Sugar content chart tooltips
+        const sugarBars = document.querySelectorAll('.sugar-segment');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        
+        sugarBars.forEach(bar => {
+            bar.addEventListener('mousemove', function(e) {
+                const height = parseInt(this.style.height);
+                const type = this.classList.contains('regular') ? 'Regular' : 
+                            this.classList.contains('low-sugar') ? 'Low-sugar' : 'No-sugar';
+                
+                tooltip.style.opacity = '1';
+                tooltip.style.left = `${e.pageX + 10}px`;
+                tooltip.style.top = `${e.pageY + 10}px`;
+                tooltip.textContent = `${type}: ${height}%`;
+            });
+            
+            bar.addEventListener('mouseout', function() {
+                tooltip.style.opacity = '0';
+            });
+        });
+    </script>
+</body>
+</html>
